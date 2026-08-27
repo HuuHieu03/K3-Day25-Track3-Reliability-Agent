@@ -98,7 +98,7 @@ Thực nghiệm chạy 2 lần đo lường với cùng bộ dữ liệu tải 3
 
 ### Evidence of shared state
 
-Kiểm chứng 2 thực thể cache riêng biệt (`c1` và `c2`) cùng kết nối tới Redis thấy chung một dữ liệu:
+1. **Kiểm chứng Code**: 2 thực thể cache riêng biệt (`c1` và `c2`) cùng kết nối tới Redis thấy chung một dữ liệu:
 
 ```python
 # test_shared_state_across_instances in tests/test_redis_cache.py
@@ -108,6 +108,22 @@ c1.set("shared query", "shared response")
 cached, score = c2.get("shared query")
 assert cached == "shared response"  # Instance c2 đọc được dữ liệu do c1 ghi
 ```
+
+2. **Kiểm chứng Thực tế qua Pytest Log (`reports/test_log.txt`)**:
+Toàn bộ 6 bài test Redis (`test_redis_cache.py`) đều đạt trạng thái `PASSED` 100%:
+
+```
+tests/test_redis_cache.py::test_redis_connection PASSED                  [ 71%]
+tests/test_redis_cache.py::test_set_and_exact_get PASSED                 [ 73%]
+tests/test_redis_cache.py::test_ttl_expiry PASSED                        [ 76%]
+tests/test_redis_cache.py::test_shared_state_across_instances PASSED     [ 78%]
+tests/test_redis_cache.py::test_privacy_query_not_cached PASSED          [ 80%]
+tests/test_redis_cache.py::test_false_hit_different_years PASSED         [ 83%]
+
+======================== 35 passed, 7 xpassed in 4.04s ========================
+```
+
+*(Chi tiết xem tệp đính kèm: `reports/test_log.txt` và ảnh chụp màn hình kiểm thử `reports/test_run_screenshot.jpg`)*
 
 ### Redis CLI output
 
