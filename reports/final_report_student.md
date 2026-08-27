@@ -123,7 +123,7 @@ tests/test_redis_cache.py::test_false_hit_different_years PASSED         [ 83%]
 ======================== 35 passed, 7 xpassed in 4.04s ========================
 ```
 
-*(Chi tiết xem tệp đính kèm: `reports/test_log.txt` và ảnh chụp màn hình kiểm thử `reports/test_run_screenshot.jpg`)*
+*(Chi tiết xem tệp đính kèm: `reports/test_log.txt` và ảnh chụp màn hình kiểm thử thực tế `reports/test_run_screenshot.png`)*
 
 ### Redis CLI output
 
